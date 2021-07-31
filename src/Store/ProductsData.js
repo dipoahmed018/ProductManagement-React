@@ -1,12 +1,11 @@
-import React, { useState, createContext, useEffect, useContext} from 'react'
-import { Usercontext } from './Userinfo';
+import React, { useState, createContext} from 'react'
 
 export const Productscontext = createContext('loading');
 
 export function ProductsData(props) {
-    const [productsData, setProductsData] = useState(undefined)
+    const [products, setProducts] = useState({data: [], nextPage: undefined})
     return(
-    <Productscontext.Provider value={{ productsData, setProductsData}}>
+    <Productscontext.Provider value={{ products, setProducts}}>
         {props.children}
     </Productscontext.Provider>
     )

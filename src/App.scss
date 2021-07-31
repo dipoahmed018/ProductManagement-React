@@ -1,177 +1,317 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Cinzel&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Abel&display=swap");
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css");
 
-$background : #25395C;
-$background2 : #2787EA;
-$glass : #e6e6e616;
-$inside3 : #f2c7c380;
-$text : #A4B0FF;
-$text2 : #081d3e;
-$border : red;
-$form_font : 'Cinzel', serif;
-$product_font : 'Abel', sans-serif;
+$background: #25395c;
+$background2: #2787ea;
+$glass: #e6e6e616;
+$inside3: #f2c7c380;
+$text: #a4b0ff;
+$text2: #081d3e;
+$border: red;
+$form_font: "Cinzel", serif;
+$product_font: "Abel", sans-serif;
+
 body {
-    background-color: $background;
-    color : $text;
-    font-family : $product_font;
+  background-color: $background;
+  color: $text;
+  font-family: $product_font;
 }
 .hide {
-    display: none;
+  display: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
 }
 @media only screen and (max-width: 680px) {
-    .login, .register {
-        max-width: 90%;
-        min-width: 80%;
+  .login,
+  .register,
+  .form {
+    max-width: 90%;
+    min-width: 80%;
+  }
+  .product-wrapper {
+    overflow: hidden;
+    grid-template-areas:
+      "image image image"
+      "title title title"
+      "description description description"
+      "details details details";
+    max-width: 100vw;
+    .product-image {
+      max-width: 100%;
+      max-height: 400px;
     }
-    .product-wrapper {
-        max-height: 400px;
-        max-width: 90%;
-        grid-template-areas: 
-        "image image image"
-        "ttile title details"
-        "description description description";
+
+    .title {
+      max-width: 100%;
     }
+  }
 }
 @media only screen and (min-width: 680px) {
-    .login, .register {
-        box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
-        max-width: 80%;
-        min-width: 40%;
+  .login,
+  .register,
+  .form {
+    max-width: 80%;
+    min-width: 40%;
+  }
+  .product-wrapper {
+    grid-template-areas:
+      "image title title"
+      "image  description description"
+      "image description description"
+      "image details details";
+    .product-image {
+      overflow: hidden;
+      max-width: 100%;
+      min-width: 100px;
+      max-height: 350px;
     }
-    .product-wrapper {
-        max-height: 400px;
-        grid-template-areas: 
-        "image title title"
-        "image description description"
-        "details details details";
+    .title {
+      max-width: 100%;
+      margin: 0px 0px 5px 5px;
     }
+    .product-description {
+      margin: 0px 0px 5px 5px;
+    }
+    .product-details {
+      margin-left: 5px;
+    }
+  }
+}
+a {
+  color: $background2;
+  text-decoration: none;
 }
 
-.login, .register {
-    position: fixed;
-    display: flex;
-    justify-content: center;
-    background-color: $glass;
-    height: auto;
-    padding: clamp(4px, 5vw, 60px);
-    flex-direction: column;
-    justify-content: center;
-    top : 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    .password-block {
-        background-color: $inside3;
-        position : relative;
-        padding-right: 10px;
-        width: 100%;
-        border-radius: 2px;
-        input[name='password'] {
-            width: 92% ;
-            background-color: rgba(255, 255, 255, 0);
-        }
-        i {
-            width: 8%;
-            position: absolute;
-            top : 50%;
-            left: 93%;
-            font-size: 20px;
-            color : $text2;
-            transform: translateY(-50%);
-            display: inline-block;
-            height: 30px;
-        }
-    }
-    .password-block:hover {
-        cursor: pointer;
-    }
-    input[type="submit"] {
-        background-color: $inside3;
-        border : none;
-        cursor: pointer;
-        border-radius: 2px;
-        width: 100px;
-        height: 30px;
-        font-family: $form_font;
-    }
+.header {
+  width: 100%;
 }
-
-input[type='email'], input[type='text'], input[type='password'] {
+.login,
+.register,
+.form {
+  position: absolute;
+  display: flex;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+  justify-content: center;
+  background-color: $glass;
+  height: auto;
+  padding: clamp(4px, 5vw, 60px);
+  flex-direction: column;
+  justify-content: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  .password-block {
     background-color: $inside3;
-    color : $text2;
+    position: relative;
+    padding-right: 10px;
+    width: 100%;
+    border-radius: 2px;
+    input[name="password"] {
+      width: 92%;
+      background-color: rgba(255, 255, 255, 0);
+    }
+    i {
+      width: 8%;
+      position: absolute;
+      top: 50%;
+      left: 93%;
+      font-size: 20px;
+      color: $text2;
+      transform: translateY(-50%);
+      display: inline-block;
+      height: 30px;
+    }
+  }
+  .password-block:hover {
+    cursor: pointer;
+  }
+  input[type="submit"] {
+    background-color: $inside3;
+    border: none;
+    cursor: pointer;
+    border-radius: 2px;
+    max-width: 300px;
+    height: 30px;
+    font-family: $form_font;
+  }
+  input[type="email"],
+  input[type="text"],
+  input[type="password"] {
+    background-color: $inside3;
+    color: $text2;
     outline: none;
     border: none;
     border-radius: 2px;
     width: 100%;
     padding-left: 10px;
-    height: 30PX;
+    height: 30px;
     margin-bottom: 2px;
+  }
 }
 
 .form-link-button {
-    cursor: pointer;
-    font-family: $form_font;
-    font-size: 13px;
-    background-color: $background2;
-    border : none;
-    width: 100px;
-    height: 30px;
+  cursor: pointer;
+  font-family: $form_font;
+  font-size: 13px;
+  background-color: $background2;
+  border: none;
+  width: 100px;
+  height: 30px;
 }
 .buttons {
-    display: flex;
-    justify-content: center;
-    margin-top :15px;
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
 }
 
 .register .buttons {
-    margin-top: 15px;
+  margin-top: 15px;
 }
 
 .error-notice {
-    color: rgb(255, 202, 97);
-    i {
-        display: inline-block;
-        margin-left: 10px;
-        color: rgb(242, 98, 98);
-        cursor: pointer;
-    }
+  color: rgb(255, 202, 97);
+  i {
+    display: inline-block;
+    margin-left: 10px;
+    color: rgb(242, 98, 98);
+    cursor: pointer;
+  }
 }
-
 
 //product
 
 .product-wrapper {
-    margin : 50px;
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    grid-template-rows: 1fr 1.2fr 1fr;
+  margin: 40px;
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  grid-template-rows: repeat(4, auto);
+  border-bottom: 2px solid $inside3;
+  .product-image {
+    grid-area: image;
+    overflow: hidden;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.455);
+  }
+  .title {
+    grid-area: title;
+  }
+  .product-description {
+    grid-area: description;
+  }
+  .product-details {
+    grid-area: details;
 
-    .product-image {
-        grid-area: image;
-        overflow: hidden;
-        box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.455);
-        img {
-            height: 100%;
+    .product-control {
+      display: flex;
+      justify-content: space-between;
+      .owner-privilege {
+        button {
+          margin-left: 10px;
         }
+      }
     }
-    .product-title {
-        border-top : 2px solid $border;
-        border-right : 2px solid $border;
-        grid-area: title;
-        margin : 0px;
-        padding-left : 20px;
-    }
-    .product-description {
-        grid-area: description;
-        margin: 0px;
-        padding-left : 20px;
-        border-right : 2px solid $border;
+  }
 
+  .butn {
+    border: none;
+  }
+  .button-edit {
+    background-color: rgb(183, 183, 118);
+  }
+  .button-delete {
+    background-color: rgb(142, 48, 48);
+  }
+  .button-purchase {
+    background-color: plum;
+  }
+}
+
+//product
+.product-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.product-form {
+  margin: 0 auto;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+  background-color: $glass;
+  padding: clamp(4px, 5vw, 60px);
+
+  label {
+    margin-left: 5px;
+  }
+  input[type="text"] {
+    background-color: $inside3;
+    color: $text2;
+    outline: none;
+    border: none;
+    border-radius: 2px;
+    width: 95%;
+    padding-left: 10px;
+    height: 30px;
+    margin: 5px;
+  }
+  textarea {
+    background: $inside3;
+    margin: 5px;
+    border: none;
+    width: 95%;
+  }
+  input[type="number"] {
+    max-width: 300px;
+    background-color: $inside3;
+    color: $text2;
+    border: none;
+    outline: none;
+    margin: 5px;
+  }
+  input[type="submit"] {
+    background: $inside3;
+    border: none;
+    max-width: 50%;
+    height: 30px;
+    margin: 5px;
+  }
+  .image-upload-box {
+    margin-bottom: 5px;
+    display: flex;
+    width: 95%;
+    label {
+      max-width: 50%;
+      min-width: 100px;
+      text-align: center;
+      padding-top: 6px;
+      height: 30px;
+      background-color: $background2;
+      border: 0px;
     }
-    .product-details {
-        grid-area: details;
-        padding-left : 20px;
-        border-right : 2px solid $border;
-        border-bottom: 2px solid $border;
+    input[type="file"] {
+      position: absolute;
+      width: 0.1px;
+      height: 0.1px;
     }
+  }
+  .image-preview-box {
+    margin-top: 10px;
+    position: relative;
+    i {
+      position: absolute;
+      right: 6%;
+      top: 1%
+    }
+    img {
+      max-width: 95%;
+      max-height: 400px;
+    }
+  }
 }

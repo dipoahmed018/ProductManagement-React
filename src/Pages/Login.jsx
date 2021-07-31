@@ -20,12 +20,26 @@ export default function Login (){
             setError('please provide you email address')
             return;
         }
-        if(input.password.length < 1){
-            setError('please provide you password')
+        if(input.password.length < 8){
+            setError('password length must be bigger then 7')
             return;
         }
-        setUser({email : input.email, password : input.password, name: 'dipo'}, history.push('/'))
-        
+        fetch('http://127.0.0.1:8000/api/user/login', {
+            method : 'post', 
+            body : JSON.stringify(input),
+            mode : 'cors',
+            headers : {
+                'Accept' : 'application/json',
+                'Content-type' : 'application/json',
+            }
+        }).then(res => res.ok ? res.json() : Promise.reject(res))
+        .then(data => {
+            setUser(data)
+            history.push('/')
+        })
+        .catch(err => {
+           err.json().then(data => setError(data.message ?? 'something went wrong please try again'))
+        })
     }
     const changePasswordVIsibility = (e) => {
         if (e.target.classList.contains('bi-eye-slash')) {
@@ -46,7 +60,6 @@ export default function Login (){
         } else {
            error_box.current.classList.remove('hide') 
         }
-        setUser({email : input.email, password : input.password, name: 'dipo'}, history.push('/'))
     }, [error])
 
     if (typeof user == 'object') {
@@ -63,6 +76,7 @@ export default function Login (){
                 <i onClick={changePasswordVIsibility} className="bi bi-eye"></i>
                 </div>
                 <div ref={error_box} className="error-notice">{error}<i className="bi bi-x-circle" onClick={() => setError('')}></i></div>
+                <Link to="/forgot-password"> Forgot Password</Link>
                 <div className="buttons">
                 <input type="submit" value="log in"/>
                 <Link to="/register"> <button  className="form-link-button">register <i className="bi bi-box-arrow-up-right"></i></button></Link>
