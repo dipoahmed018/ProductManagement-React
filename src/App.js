@@ -8,7 +8,6 @@ import { ProductsData } from "./Store/ProductsData";
 import ForgotPassword from "./Pages/ForgotPassword";
 import ResetPassword from "./Pages/ResetPassword";
 import Product from "./Pages/Product/Product";
-import Header from "./Components/Shared/Header";
 
 function App() {
   return (

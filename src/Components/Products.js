@@ -9,28 +9,22 @@ export default function Products() {
   const {products, setProducts } = useContext(Productscontext);
   const productsElem = useRef();
 
-  const getProducts = (newxtPage = "http://127.0.0.1:8000/api/products") => {
-    fetch(newxtPage, {
+  const getProducts = (nextpage = "http://127.0.0.1:8000/api/products") => {
+    fetch(nextpage, {
       method: "get",
     })
       .then((res) => res.json())
       .then((res) => {
         setProducts((prev) => {
-            return {data : [...prev.data , ...res.products.data], nextPage : res.products.next_page_url}
+            return {data : [...prev?.data , ...res.products?.data], nextPage : res.products?.next_page_url}
         });
       })
-      .catch((err) => setProducts(undefined));
+      .catch((err) => console.log(err));
   }
 
   useEffect(() => {
-    getProducts()
-  }, [])
-  useEffect(() => {
-    if (products.nextPage) {
-      const chil = productsElem.current
-      console.log(chil.lastElementChild)
-    }
-  }, [products])
+    products?.nextPage ? getProducts(nextPage) : getProducts()
+  }, [products.nextPage])
   return (
     <div>
       <h1>products</h1>
