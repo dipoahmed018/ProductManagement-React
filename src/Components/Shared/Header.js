@@ -31,7 +31,6 @@ export default function Header() {
   return (
     <div className="header">
       <Link to="/">Home</Link>
-      {user && <Link to="/profile">{user?.name}</Link>}
       {user && <button onClick={() => logout()}>Log out</button>}
       {!user && path !== '/login' && <Link to='/login'>Login</Link>}
       {!user && path !== '/register' && <Link to='/register'>Register</Link>}

@@ -8,7 +8,7 @@ export default function Login() {
     const { user, setUser } = useContext(Usercontext)
     const history = useHistory()
     const [error, setError] = useState('')
-    const [input, setInput] = useState({ email: '', password: 'password' })
+    const [input, setInput] = useState({ email: '', password: '' })
     const input_password = useRef()
     const error_box = useRef()
     const updateInputs = (e) => {
@@ -74,17 +74,17 @@ export default function Login() {
                 <div className="form login">
                     <form onSubmit={submit} action="">
                         <label htmlFor="email">Email</label><br />
-                        <input required onChange={updateInputs} type="email" name="email" id="email" value={input.email} /><br />
+                        <input required onChange={updateInputs} type="email" name="email" id="email" /><br />
                         <label htmlFor="password">Password</label><br />
                         <div className="password-block">
-                            <input ref={input_password} required onChange={updateInputs} type="password" name="password" id="password" value={input.password} />
+                            <input ref={input_password} required onChange={updateInputs} type="password" name="password" id="password" />
                             <i onClick={changePasswordVIsibility} className="bi bi-eye"></i>
                         </div>
                         <div ref={error_box} className="error-notice">{error}<i className="bi bi-x-circle" onClick={() => setError('')}></i></div>
                         <Link to="/forgot-password"> Forgot Password</Link>
                         <div className="buttons">
                             <input type="submit" value="log in" />
-                            <Link to="/register"> <button className="form-link-button">register <i className="bi bi-box-arrow-up-right"></i></button></Link>
+                            <Link to="/register"> <button className="form-link-button">Register <i className="bi bi-box-arrow-up-right"></i></button></Link>
                         </div>
                     </form>
                 </div>
