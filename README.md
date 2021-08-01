@@ -4,8 +4,8 @@
 #Features
 Basic Login and Register built with Laravel sanctum
 
-Basic Product CRUD 
-Product Load in infinite scroll
+#Basic Product CRUD 
+#Product Load in infinite scroll
 
 ### `npm start`
 
