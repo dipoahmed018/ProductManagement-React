@@ -46,7 +46,7 @@ export default function ProductCard({ product }) {
                 <p className="product-price">Price: {price}</p>
                 <div className="product-control">
                     {user?.email_verified_at && (
-                        <button className="butn button-purchase"> purchase </button>
+                        <button className="butn product-purchase"> purchase </button>
                     )}
                     {user?.id == owner && (
                         <div className="owner-privilege">

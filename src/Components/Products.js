@@ -49,14 +49,15 @@ export default function Products() {
     }
   }, [])
   return (
-    <div ref={productsParent} className="products">
+    <div className="container">
       {!products && <Error message={'something went wrong please try again'} />}
-      {products?.length < 1 && <Loading />}
-      {products?.length > 0 &&
-        products?.map((prdct) => {
-          return <ProductCard key={prdct.id.toString()} product={prdct} />
-        })}
-      {nextPage ? <Loading /> : <h1>No more Product available</h1>}
+      <div ref={productsParent} className="products">
+        {products?.length > 0 &&
+          products?.map((prdct) => {
+            return <ProductCard key={prdct.id.toString()} product={prdct} />
+          })}
+      </div>
+      {nextPage || products.length < 1 ? <Loading /> : <h1>No more Product available</h1>}
     </div>
   );
 }

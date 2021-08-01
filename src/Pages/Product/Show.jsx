@@ -62,23 +62,23 @@ export default function Show() {
         <Fragment>
             {error && <Wrong message={error}></Wrong>}
             {product &&
-                <div>
+                <div className="product-show">
 
                     <div className="image-viewer">
                         <img width="100%" src={product.image} alt="no image found" />
                     </div>
 
-                    <div className="title"><h2>{product.title}</h2><div className="menu">:</div></div>
+                    <div className="title"><h2><span className="label">Title:</span> {product.title}</h2><div className="menu">:</div></div>
 
                     <div className="description">
-                        {product.description}
+                        <span className="label">Description:</span>  {product.description}
                     </div>
                     <div className="interect">
                         <button className="product-purchase">paurchase</button>
                         {product.owner == user?.id &&
                             <Fragment>
-                                <button className="product-edit"><Link to={`/product/edit/${id}`} >Edit</Link></button>
-                                <button className="product-delete" onClick={deleteProduct}>Delete</button>
+                                <button className="button-edit product-edit"><Link to={`/product/edit/${id}`} >Edit</Link></button>
+                                <button className="button-delete product-delete" onClick={deleteProduct}>Delete</button>
                             </Fragment>
                         }
                     </div>
