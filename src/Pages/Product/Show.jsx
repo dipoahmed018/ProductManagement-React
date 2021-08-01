@@ -19,15 +19,12 @@ export default function Show() {
             method: "delete",
             headers: {
                 "Accept": "application/json",
-                "Authorization" : 'Bearer ' + Cookies.get('token')
+                "Authorization": 'Bearer ' + Cookies.get('token')
             },
         })
             .then((res) => {
                 if (res.ok) {
-                    setProducts((prev) => ({
-                        ...prev,
-                        data: prev.data.length > 0 ? prev.data.filter(prdct => prdct?.id !== id) : []
-                    }));
+                    setProducts(prev => (prev ? prev.filter(prev_product => prev_product.id !== id) : prev))
                 }
                 history.push("/");
             })
@@ -35,11 +32,11 @@ export default function Show() {
     };
     const getProduct = () => {
 
-        const data = products.data?.find(value => value.id == id)
+        const data = products.find(value => value?.id == id)
         if (data) {
             setProduct(data)
             return;
-        } else if (location.state.product) {
+        } else if (location?.state?.product) {
             setProduct(location.state.product)
             return;
         } else {

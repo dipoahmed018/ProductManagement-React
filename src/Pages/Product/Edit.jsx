@@ -59,12 +59,9 @@ export default function Edit() {
         }).then((res) => res.ok ? res.json() : Promise.reject(res))
             .then(data => {
                 if (id) {
-                    setProducts(prev => ({
-                        ...prev,
-                        data: prev.data.map(prdct => (!prdct ? data : prdct.id == data.id ? data : prdct))
-                    }))
+                    setProducts(prev => (prev.map(prdct => (!prdct ? data : prdct.id == data.id ? data : prdct))))
                 } else {
-                    setProducts(prev => ({ ...prev, data: [...prev.data, data] }))
+                    setProducts(prev => ([...prev, data]))
                 }
                 history.push(`/product/show/${data.id}`, { product: data })
             })
@@ -80,13 +77,15 @@ export default function Edit() {
     }
     const getProduct = async (id) => {
         try {
-            let data = products.data.find(prdct => prdct.id == id)
-            if (data?.owner !== user?.id) {
-                setProduct(undefined)
-                setError('You do not have permission to edit this product')
-            }
+            let data = products.find(prdct => prdct.id == id)
             if (data) {
+                if (data?.owner !== user?.id) {
+                    setProduct(undefined)
+                    setError('You do not have permission to edit this product')
+                    return;
+                }
                 setProduct(data)
+                return;
             }
             if (!data) {
                 const res = await fetch(`http://127.0.0.1:8000/api/products/${id}`, {
@@ -96,7 +95,7 @@ export default function Edit() {
                         'Accept': 'application/json'
                     }
                 })
-                const prdct = res.ok ? res.json() : Promise.reject(res)
+                const prdct = res.ok ? await res.json() : Promise.reject(res)
                 if (prdct?.owner == user.id) {
                     setProduct(prdct)
                 }
@@ -120,7 +119,6 @@ export default function Edit() {
 
     return (
         <div className="product-container">
-            <Header />
             {error &&
                 <Wrong message={error}></Wrong>
             }

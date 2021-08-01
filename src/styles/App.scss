@@ -315,3 +315,35 @@ a {
     }
   }
 }
+
+.header {
+  display: flex;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+  flex-direction: row;
+  justify-content: center;
+  a, button {
+    display: block;
+    flex-grow: 150px;
+    flex-basis: 100px;
+    flex-shrink: 80px;
+    list-style: none;
+    background-color: rgba(69, 69, 69, 0.05);
+    border : 0px;
+    color: $inside3;
+    margin: 15px;
+  }
+  a, button:hover {
+    cursor: pointer;
+  }
+}
+.loading {
+  margin : 0 auto;
+}
+.products {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  h1 {
+    margin: 0 auto;
+  }
+}

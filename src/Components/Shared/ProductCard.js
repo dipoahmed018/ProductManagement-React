@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Usercontext } from "../../Store/Userinfo";
 import { Link, useHistory } from "react-router-dom";
 import { Productscontext } from "../../Store/ProductsData";
 import Cookies from "js-cookie";
 
-export default function ProductCard({ product: { id, title, description, price, image, owner } }) {
+export default function ProductCard({ product }) {
+    let { id, title, description, price, owner, image } = product
     const { user } = useContext(Usercontext);
     const { products, setProducts } = useContext(Productscontext);
     const history = useHistory()
@@ -25,21 +26,21 @@ export default function ProductCard({ product: { id, title, description, price, 
         })
             .then((res) => {
                 if (res.ok) {
-                    setProducts((prev) => ({
-                        ...prev,
-                        data: prev.data.length > 0 ? prev.data?.filter(prdct => prdct?.id !== id) : []
-                    }));
+                    setProducts(prev => (prev ? prev.filter(prev_product => prev_product.id !== id) : prev))
                 }
                 history.push("/");
             })
             .catch((err) => console.log(err));
     };
+
     return (
         <div className={"product-wrapper"}>
             <img className="product-image" loading="lazy" src={image} alt="no image found" />
-            <Link to={show}>
-                <h3 className="title">Title: {title}</h3>
-            </Link>
+            <h3 className="title">
+                <Link to={show}>
+                    Title: {title}
+                </Link>
+            </h3>
             <p className="product-description">Description: {description}</p>
             <div className="product-details">
                 <p className="product-price">Price: {price}</p>
